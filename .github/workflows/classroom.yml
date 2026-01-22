@@ -1,0 +1,240 @@
+name: GitHub Classroom Autograding (20 x 1pt)
+
+on:
+  push:
+  workflow_dispatch:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  autograding:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: "17"
+          cache: maven
+
+      # -------------------------
+      # Queue tests (1 point each)
+      # -------------------------
+      - name: TC01 - Queue empty behavior
+        id: tc01
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC01"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc01_emptyQueueBehavior test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC02 - Queue FIFO order
+        id: tc02
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC02"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc02_fifoOrder test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC03 - Queue wraparound
+        id: tc03
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC03"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc03_wrapAroundWorks test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC04 - Queue full throws
+        id: tc04
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC04"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc04_fullQueueThrows test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC05 - Queue size tracking
+        id: tc05
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC05"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc05_sizeTracksCorrectly test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC06 - Queue alternating ops
+        id: tc06
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC06"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc06_alternatingOps test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC07 - Queue multiple wrap cycles
+        id: tc07
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC07"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc07_multipleWrapCycles test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC08 - Queue first does not remove
+        id: tc08
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC08"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc08_firstDoesNotRemove test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC09 - Queue dequeue until empty
+        id: tc09
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC09"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc09_dequeueUntilEmpty test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC10 - Queue capacity 1 edge
+        id: tc10
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC10"
+          command: "mvn -q -Dtest=ArrayQueueTest#tc10_capacityOneEdge test"
+          timeout: "5"
+          max-score: "1"
+
+      # -------------------------
+      # Stack-using-queue tests (1 point each)
+      # -------------------------
+      - name: TC11 - Stack empty behavior
+        id: tc11
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC11"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc11_emptyStackBehavior test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC12 - Stack LIFO order
+        id: tc12
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC12"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc12_lifoOrder test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC13 - Stack interleaved ops
+        id: tc13
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC13"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc13_interleavedOps test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC14 - Stack top does not pop
+        id: tc14
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC14"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc14_topDoesNotRemove test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC15 - Stack size tracking
+        id: tc15
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC15"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc15_sizeTracksCorrectly test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC16 - Stack pop until empty
+        id: tc16
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC16"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc16_popUntilEmpty test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC17 - Stack capacity limit throws
+        id: tc17
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC17"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc17_capacityLimitThrows test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC18 - Stack handles many pushes
+        id: tc18
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC18"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc18_manyPushesAndPops test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC19 - Stack alternation pattern
+        id: tc19
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC19"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc19_alternatingPattern test"
+          timeout: "5"
+          max-score: "1"
+
+      - name: TC20 - Stack capacity 1 edge
+        id: tc20
+        uses: classroom-resources/autograding-command-grader@v1
+        with:
+          test-name: "TC20"
+          command: "mvn -q -Dtest=StackUsingQueueTest#tc20_capacityOneEdge test"
+          timeout: "5"
+          max-score: "1"
+
+      # -------------------------
+      # Reporter: send all 20 results to Classroom
+      # -------------------------
+      - name: Autograding Reporter
+        uses: classroom-resources/autograding-grading-reporter@v1
+        if: always()
+        env:
+          TC01_RESULTS: "${{ steps.tc01.outputs.result }}"
+          TC02_RESULTS: "${{ steps.tc02.outputs.result }}"
+          TC03_RESULTS: "${{ steps.tc03.outputs.result }}"
+          TC04_RESULTS: "${{ steps.tc04.outputs.result }}"
+          TC05_RESULTS: "${{ steps.tc05.outputs.result }}"
+          TC06_RESULTS: "${{ steps.tc06.outputs.result }}"
+          TC07_RESULTS: "${{ steps.tc07.outputs.result }}"
+          TC08_RESULTS: "${{ steps.tc08.outputs.result }}"
+          TC09_RESULTS: "${{ steps.tc09.outputs.result }}"
+          TC10_RESULTS: "${{ steps.tc10.outputs.result }}"
+          TC11_RESULTS: "${{ steps.tc11.outputs.result }}"
+          TC12_RESULTS: "${{ steps.tc12.outputs.result }}"
+          TC13_RESULTS: "${{ steps.tc13.outputs.result }}"
+          TC14_RESULTS: "${{ steps.tc14.outputs.result }}"
+          TC15_RESULTS: "${{ steps.tc15.outputs.result }}"
+          TC16_RESULTS: "${{ steps.tc16.outputs.result }}"
+          TC17_RESULTS: "${{ steps.tc17.outputs.result }}"
+          TC18_RESULTS: "${{ steps.tc18.outputs.result }}"
+          TC19_RESULTS: "${{ steps.tc19.outputs.result }}"
+          TC20_RESULTS: "${{ steps.tc20.outputs.result }}"
+        with:
+          runners: tc01,tc02,tc03,tc04,tc05,tc06,tc07,tc08,tc09,tc10,tc11,tc12,tc13,tc14,tc15,tc16,tc17,tc18,tc19,tc20
